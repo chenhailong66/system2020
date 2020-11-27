@@ -1,0 +1,16 @@
+
+.col-cou_name, .col-cou_no, .col-place, .col-time {
+    min-width: 4em;
+    width: 8em;
+    text-align: center;
+}
+
+td.col-cou_name, td.col-cou_no, td.col-place, td.col-time {
+    text-align: center;
+}
+
+.paper-body > table {
+    width: 100%;
+}
+
+

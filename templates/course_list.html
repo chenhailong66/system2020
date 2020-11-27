@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+<!--  -->
+{% block styles %}
+<link rel="stylesheet" href="/course_list.css" />
+{% endblock %}
+
+<!--  -->
+{% block page_content %}
+<div class="paper">
+    <!--添加课程计划表格属性名-->
+    <div class="paper-body">
+        <table id="course-table" class="table">
+            <thead>
+                <tr>
+                    <th class="col-cou_name">课程</th>
+                    <th class="col-cou_no">课程号</th>
+                    <th class="col-gender">上课地点</th>
+                    <th class="col-enrolled">上课时间</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+
+
+</div>
+   
+{% endblock %}
