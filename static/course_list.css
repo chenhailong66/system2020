@@ -14,3 +14,17 @@ td.col-cou_name, td.col-cou_no, td.col-place, td.col-time {
 }
 
 
+td.ctrlbar {
+    width: 10em;
+}
+
+td.ctrlbar > div {
+    display: flex;
+}
+
+td.ctrlbar .btn {
+    margin: 0 2px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+}
+
