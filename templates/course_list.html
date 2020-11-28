@@ -8,6 +8,18 @@
 <!--  -->
 {% block page_content %}
 <div class="paper">
+    
+    <!--实现学期选择和新建课程计划-->
+    <div class ="paper-terms"> 
+        <lable>当前学期为：</lable>
+        <input type="text" name = "term" id = "current_term" value ="2020-2021" height="16px">
+        <input type="button" value="查询课程计划" id = "change_termbtn">
+    </div>
+    <div class="paper-head">
+        <span id="new-btn" class="btn">新建课程计划</span>
+        <span id = "choose-btn" class = "btn">学生选课</span>
+    </div>
+
     <!--添加课程计划表格属性名-->
     <div class="paper-body">
         <table id="course-table" class="table">
@@ -24,8 +36,44 @@
             <tbody></tbody>
         </table>
     </div>
-
-
+     
+    <!--新填一个课程信息，页面显示内容通过javascript实现-->
+    <div class="course-editor dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <input type="hidden" name="courseplan_sn" />
+                <input type="hidden" name="term" />
+                <input type="hidden" name=""/>
+                <label>课程号: </label>
+                <input type="text" name="no" />
+                <label>上课时间: </label>
+                <input type="text" name="time" />
+                <label>课程名: </label>
+                <input type="text" name="name" />
+                <label>上课地点: </label>
+                <input type="text" name="place" />
+            </div>
+            <div class="dialog-footer">
+                <a id="save-btn" class="btn">保存</a>
+                <a id="close-btn" class="btn">关闭</a>
+            </div>
+        </form>
+    </div>
+    
+    <!--确定是否删除界面-->
+    <div class="comfirmation-dialog dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <div id="message"></div>
+            </div>
+            <div class="dialog-footer">
+                <a id="ok-btn" class="btn">确定</a>
+                <a id="cancel-btn" class="btn">放弃</a>
+            </div>
+        </form>
+    </div>
 
 
 </div>
