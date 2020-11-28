@@ -1,4 +1,5 @@
 //设置当前学期，和实现更改学期操作
+
 let current_term = '2020-2021'
 function change_term() {
     let inputEl = document.getElementById("current_term");
