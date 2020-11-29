@@ -109,6 +109,12 @@ function renderRecordCtrlbar(item) {
     };
     ctrlbarEl.append(delBtn);
 
+    //实现添加课程成绩按钮
+    let add_gradeBtn = document.createElement("a");
+    add_gradeBtn.className = "btn";
+    add_gradeBtn.innerText = "课程成绩";
+    //这里加上点击事件
+
     return ctrlbarEl;
 }
 
@@ -154,6 +160,15 @@ async function renderEditDialog() {
     newcourseplanBtn.onclick = (e) => {
         openEditDialog();
     };
+
+
+    //点击学生选课按钮出现选课界面
+    let choose_dialog = document.querySelector(".select_course_grade_dialog")
+    let choosecoursebtn = document.querySelector(".paper #choose-btn");
+    //这里实现具体功能
+
+
+
 
     let dialog = document.querySelector(".course-editor");
 
