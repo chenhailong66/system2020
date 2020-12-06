@@ -2,22 +2,21 @@
 
 <!--  -->
 {% block styles %}
-<link rel="stylesheet" href="/course_list.css" />
-{% endblock %}
+<link rel="stylesheet" href="/course_list.css" /> {% endblock %}
 
 <!--  -->
 {% block page_content %}
 <div class="paper">
-    
+
     <!--实现学期选择和新建课程计划-->
-    <div class ="paper-terms"> 
+    <div class="paper-terms">
         <lable>当前学期为：</lable>
-        <input type="text" name = "term" id = "current_term" value ="2020-2021" height="16px">
-        <input type="button" value="查询课程计划" id = "change_termbtn">
+        <input type="text" name="term" id="current_term" value="2020-2021" height="16px">
+        <input type="button" value="查询课程计划" id="change_termbtn">
     </div>
     <div class="paper-head">
         <span id="new-btn" class="btn">新建课程计划</span>
-        <span id = "choose-btn" class = "btn">学生选课</span>
+        <span id="choose-btn" class="btn">学生选课</span>
     </div>
 
     <!--添加课程计划表格属性名-->
@@ -36,7 +35,7 @@
             <tbody></tbody>
         </table>
     </div>
-     
+
     <!--新填一个课程信息，页面显示内容通过javascript实现-->
     <div class="course-editor dialog-background">
         <form class="dialog">
@@ -44,7 +43,7 @@
             <div class="dialog-body">
                 <input type="hidden" name="courseplan_sn" />
                 <input type="hidden" name="term" />
-                <input type="hidden" name=""/>
+                <input type="hidden" name="" />
                 <label>课程号: </label>
                 <input type="text" name="no" />
                 <label>上课时间: </label>
@@ -60,7 +59,7 @@
             </div>
         </form>
     </div>
-    
+
     <!--确定是否删除界面-->
     <div class="comfirmation-dialog dialog-background">
         <form class="dialog">
@@ -74,8 +73,38 @@
             </div>
         </form>
     </div>
-
+    <!--选课界面-->
+    <div class="select_course_grade_dialog">
+        <form class="dialog">
+            <div class=s elect_dialog_head>--选课界面--</div>
+            <div class="paper-terms">
+                <lable>学生姓名：</lable>
+                <input type="text" name="student_name" id="choose_course_studentname" height="16px">
+                <lable>选课学期：</lable>
+                <input type="text" name="term" id="choose_course_term" height="16px">
+                <input type="button" value="查询课程计划" id="change_choose_termbtn" class="btn">
+            </div>
+            <div class="paper-body">
+                <table id="choose_course-table" class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-stu_name">课程</th>
+                            <th class="col-stu_no">课程号</th>
+                            <th class="col-place">上课地点</th>
+                            <th class="col-time">上课时间</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="dialog-footer">
+                <a id="ok-btn" class="btn">保存</a>
+                <a id="choose_course_back-btn" class="btn">返回</a>
+            </div>
+        </form>
+    </div>
 
 </div>
-   
+
 {% endblock %}
