@@ -6,7 +6,7 @@ from serv.json_util import json_dumps
 from .config import db_block, web_routes,render_html
 
 
-#读入所有课程计划的数据
+#读入所有课程的数据
 @web_routes.get("/api/course/list")
 async def get_courseplan_list(request):
     with db_block() as db:
@@ -16,6 +16,52 @@ async def get_courseplan_list(request):
         where course.sn = courseplan.cou_sn
         order by name,courseplan_sn;
         """)
+        data = list(asdict(r) for r in db)
+
+    return web.Response(text=json_dumps(data), content_type="application/json")
+
+
+#读取一个课程计划，所有选择该计划的学生
+@web_routes.get("/api/course/{courseplan_sn:\d+}")
+async def get_courseplan_list(request):
+    courseplan_sn = request.match_info.get("courseplan_sn")
+    with db_block() as db:
+        db.execute("""
+        select stu_sn
+        from course_grade2
+        where courseplan_sn = %(courseplan_sn)s;
+        """,dict(courseplan_sn = courseplan_sn))
+        data = list(asdict(r) for r in db)
+
+    return web.Response(text=json_dumps(data), content_type="application/json")
+
+
+@web_routes.get("/api/course/addgrade/{courseplan_sn:\d+}")
+async def get_addgrade_list(request):
+    courseplan_sn = request.match_info.get("courseplan_sn")
+
+    with db_block() as db:
+        db.execute("""
+        SELECT name,courseplan_sn,grade,stu_sn
+        FROM course_grade2,student
+        where student.sn = course_grade2.stu_sn and courseplan_sn = %(courseplan_sn)s
+        """,dict(courseplan_sn = courseplan_sn))
+        data = list(asdict(r) for r in db)
+        for item in data:
+            item['grade'] = float(item['grade'])
+    return web.Response(text=json_dumps(data), content_type="application/json")
+
+@web_routes.get("/api/course/{courseplan_sn:\d+}")
+async def get_courseplan_profile(request):
+    
+    courseplan_sn = request.match_info.get("courseplan_sn")
+
+    with db_block() as db:
+        db.execute("""
+        SELECT stu_sn 
+        FROM course_grade2
+        WHERE courseplan_sn=%(courseplan_sn)s;
+        """, dict(courseplan_sn = courseplan_sn))
         data = list(asdict(r) for r in db)
 
     return web.Response(text=json_dumps(data), content_type="application/json")
@@ -44,6 +90,7 @@ async def new_courseplan(request):
 
     return web.Response(text=json_dumps(course), content_type="application/json")
 
+
 @web_routes.put("/api/course/{courseplan_sn:\d+}")
 async def update_courseplan(request):
     courseplan_sn= request.match_info.get("courseplan_sn")
@@ -68,6 +115,21 @@ async def update_courseplan(request):
 
     return web.Response(text=json_dumps(course), content_type="application/json")
 
+@web_routes.put("/api/course/{stu_sn:\d+}/{courseplan_sn:\d+}")
+async def update_grade(request):
+    stu_sn = int(request.match_info.get("stu_sn"))
+    courseplan_sn= int(request.match_info.get("courseplan_sn"))
+    grade = await request.json()
+
+    with db_block() as db:
+        db.execute("""
+        UPDATE course_grade2 SET
+            grade=%(grade)s
+        WHERE stu_sn = %(stu_sn)s and courseplan_sn=%(courseplan_sn)s;
+        """, dict(grade=grade['grade'],stu_sn=stu_sn,courseplan_sn=courseplan_sn))
+
+    return web.Response(text=json_dumps(grade), content_type="application/json")
+
 @web_routes.delete("/api/course/{courseplan_sn:\d+}")
 async def delete_courseplan(request):
     courseplan_sn = request.match_info.get("courseplan_sn")
@@ -78,19 +140,7 @@ async def delete_courseplan(request):
 
     return web.Response(text="", content_type="text/plain")
 
-#读取一个课程计划，所有选择该计划的学生111
-@web_routes.get("/api/course/{courseplan_sn:\d+}")
-async def get_courseplan_list(request):
-    courseplan_sn = request.match_info.get("courseplan_sn")
-    with db_block() as db:
-        db.execute("""
-        select stu_sn
-        from course_grade2
-        where courseplan_sn = %(courseplan_sn)s;
-        """,dict(courseplan_sn = courseplan_sn))
-        data = list(asdict(r) for r in db)
-
-    return web.Response(text=json_dumps(data), content_type="application/json")
+#学生选课取消按钮
 @web_routes.delete("/api/course/{stu_sn:\d+}/{courseplan_sn:\d+}")
 async def delete_courseplan(request):
     stu_sn = int(request.match_info.get("stu_sn"))
@@ -113,4 +163,4 @@ async def new_courseplan(request):
         INSERT INTO course_grade2 (stu_sn, courseplan_sn, grade)
         VALUES(%(stu_sn)s, %(courseplan_sn)s,%(grade)s)
         """, choose_course)
-    return web.Response(text=json_dumps(choose_course), content_type="application/json")   
+    return web.Response(text=json_dumps(choose_course), content_type="application/json")
