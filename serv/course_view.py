@@ -6,3 +6,5 @@ from .config import db_block, web_routes, render_html
 @web_routes.get("/course")
 async def view_student_list(request):
     return render_html(request, 'course_list.html')
+
+

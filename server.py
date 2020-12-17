@@ -2,13 +2,16 @@ from aiohttp import web
 
 from serv.config import web_routes, home_path
 
-import serv.error_views
+import serv.auth
 import serv.main_views
 import serv.grade_views
+import serv.grade_rest
 import serv.student_views
 import serv.student_rest
-
-import serv.grade_actions
+import serv.choose_course_view
+import serv.choose_course_rest
+import serv.course_view
+import serv.course_rest
 
 
 app = web.Application()

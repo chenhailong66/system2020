@@ -1,70 +1,37 @@
-{% extends "base.html" %} {% block styles %}
+{% extends "student_base.html" %} {% block styles %}
 <link href="/grade_list.css" rel="stylesheet" />
 {% endblock %} {% block page_content %}
-<div class="paper">
-    <form class="grade-form" action="/action/grade/add" method="post">
-        <label>学生：</label>
-        <select name="stu_sn">
-            <option value="">--选择--</option>
-            {% for stu in students %}
-            <option value="{{stu.stu_sn}}">
-                {{stu.stu_name}}({{stu.stu_sn}})
-            </option>
-            {% endfor %}
-        </select>
+<div class="paper grade">
+    <form class="lookgrade">
+        <div class="grade_title">
+            <input type="hidden" name="student_name" id="choose_course_studentname" height="16px" value="{{user}}">
+            <label>课程：</label>
+            <select name="cou_sn" class="cou_sn">
+                <option value=" ">全部课程成绩</option>
+                {% for item in courses %}
+                <option value="{{item.cou_sn}}">
+                    {{item.cou_name}}({{item.cou_sn}})
+                </option>
+                {% endfor %}
+            </select>
+            <a class="checkgradebtn">查询成绩</a>
+        </div>
 
-        <label>课程：</label>
-        <select name="cou_sn">
-            <option value="">--选择--</option>
-            {% for item in courses %}
-            <option value="{{item.cou_sn}}">
-                {{item.cou_name}}({{item.cou_sn}})
-            </option>
-            {% endfor %}
-        </select>
+        <div>
+            <table class="grade table">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>课程</th>
+                        <th>成绩</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-        <label>成绩：</label>
-        <input type="text" name="grade" />
 
-        <input type="submit" value="添加成绩" />
     </form>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>姓名</th>
-                <th>课程</th>
-                <th>成绩</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td>{{ item.stu_name }}</td>
-                <td>{{ item.cou_name }}</td>
-                <td>{{ item.grade }}</td>
-                <td>
-                    <div class="ctrlbar">
-                        <div class="btn">
-                            <a
-                                href="/grade/edit/{{item.stu_sn}}/{{item.cou_sn}}"
-                            >
-                                修改
-                            </a>
-                        </div>
-                        <div class="btn">
-                            <a
-                                href="/grade/delete/{{item.stu_sn}}/{{item.cou_sn}}"
-                            >
-                                删除
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </div>
+<script src="/grade.js"></script>
 {% endblock %}

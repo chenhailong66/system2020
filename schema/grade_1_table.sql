@@ -56,30 +56,16 @@ ALTER TABLE courseplan
 
 
 --课程表
-DROP TABLE IF EXISTS course_grade2;
-CREATE TABLE IF NOT EXISTS course_grade2  (
+DROP TABLE IF EXISTS course_grade;
+CREATE TABLE IF NOT EXISTS course_grade  (
     stu_sn INTEGER,            -- 学生序号
     courseplan_sn INTEGER,     -- 课程计划序号
     grade  NUMERIC(5,2),       -- 最终成绩
     PRIMARY KEY(stu_sn, courseplan_sn)
 );
 
-ALTER TABLE course_grade2 
+ALTER TABLE course_grade 
     ADD CONSTRAINT stu_sn_fk FOREIGN KEY (stu_sn) REFERENCES student(sn);
-ALTER TABLE course_grade2
+ALTER TABLE course_grade
     ADD CONSTRAINT courseplan_sn_fk FOREIGN KEY (courseplan_sn) REFERENCES courseplan(sn);
-
-
-DROP TABLE IF EXISTS course_grade;
-CREATE TABLE IF NOT EXISTS course_grade  (
-    stu_sn INTEGER,     -- 学生序号
-    cou_sn INTEGER,     -- 课程序号
-    grade  NUMERIC(5,2), -- 最终成绩
-    PRIMARY KEY(stu_sn, cou_sn)
-);
-
-ALTER TABLE course_grade 
-    ADD CONSTRAINT stu_sn_fk FOREIGN KEY (stu_sn) REFERENCES student(sn);
-ALTER TABLE course_grade 
-    ADD CONSTRAINT cou_sn_fk FOREIGN KEY (cou_sn) REFERENCES course(sn);
 

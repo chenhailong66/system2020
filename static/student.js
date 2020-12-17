@@ -84,6 +84,7 @@ function renderRecordCtrlbar(item) {
 
     return ctrlbarEl;
 }
+renderList();
 
 async function openEditDialog(item) {
     let dialog = document.querySelector(".student-editor");

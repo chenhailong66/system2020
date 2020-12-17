@@ -6,6 +6,7 @@ from serv.json_util import json_dumps
 from .config import db_block, web_routes
 
 
+#得到所有学生的信息
 @web_routes.get("/api/student/list")
 async def get_student_list(request):
     with db_block() as db:
@@ -16,7 +17,7 @@ async def get_student_list(request):
         
     return web.Response(text=json_dumps(data), content_type="application/json")
 
-
+#得到某一个学生的信息
 @web_routes.get("/api/student/{stu_sn:\d+}")
 async def get_student_profile(request):
     stu_sn = request.match_info.get("stu_sn")
@@ -38,6 +39,7 @@ async def get_student_profile(request):
 @web_routes.post("/api/student")
 async def new_student(request):
     student = await request.json()
+    #为入学时间提供默认值
     if not student.get('enrolled'):
         student['enrolled'] = datetime.date(1900, 1, 1)
 
@@ -49,8 +51,6 @@ async def new_student(request):
         record = db.fetch_first()
 
         student["stu_sn"] = record.sn
-    
-    print(student)
 
     return web.Response(text=json_dumps(student), content_type="application/json")
 
@@ -64,7 +64,6 @@ async def update_student(request):
         student['enrolled'] = datetime.date(1900, 1, 1)
 
     student["stu_sn"] = stu_sn
-
     with db_block() as db:
         db.execute("""
         UPDATE student SET

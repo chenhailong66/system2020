@@ -32,6 +32,9 @@ td.ctrlbar .btn {
 }
 
 .dialog-background {
+    /* position: absolute;
+    width: 100%;
+    height: 100%; */
     position: fixed;
     top: 0;
     bottom: 0;
@@ -47,6 +50,10 @@ td.ctrlbar .btn {
     background-color: hsla(0, 0%, 53%, 55%);
 
     visibility: hidden;
+}
+/*按钮样式*/
+.ctrlbar{
+    text-align: center;
 }
 
 .dialog-background.open {
@@ -111,6 +118,7 @@ td.ctrlbar .btn {
 }
 
 .dialog-body  input[type="text"] {
+    /* flex: 1 1; */
     font-size: 1.2em;
     padding: 0.2em 0.2em;
 }
@@ -135,6 +143,10 @@ td.ctrlbar .btn {
     margin-right: 1em;
 }
 
+/* .dialog-background.comfirmation-dialog {
+    visibility: visible;
+} */
+
 .comfirmation-dialog > .dialog {
     min-width: 25em;
 }
@@ -155,4 +167,168 @@ td.ctrlbar .btn {
     letter-spacing: 1px;
 }
 
+.add_course_grade_dialog{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    background-color: rgb(255, 255, 255);
+    visibility: hidden;
+}
 
+.add_course_grade_dialog.open{
+    visibility: visible;
+}
+
+.add_course_grade_dialog .dialog{
+    
+    min-height: 30em;
+    min-width: 60em;
+}
+/* 加成绩表格样式*/
+#addgarde-table
+{
+    margin-left: 40px;
+    border-collapse: collapse;
+    text-align: center;
+    width: 60%;
+}
+#addgarde-table th{
+    
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    background-color: hsl(306 40% 20%);
+    color: #fff ;
+}
+#addgarde-table th, #addgarde-table td {
+    line-height: 2;
+}
+#addgarde-table tr:nth-child(even) {
+    background-color: hsl(306 40% 90%);
+}
+.grade_dialog_head{
+    margin-left: 9em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.add_course_grade_dialog.open .dialog-footer.first{
+    position: absolute;
+    left: 60em;
+    bottom: 10em;
+}
+/*添加课程成绩键盘输入成绩界面*/
+.addgrade-dialog{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 0;
+    background-color: hsla(0, 0%, 53%, 55%);
+    visibility: hidden;
+}
+.addgrade-dialog.open {
+    visibility: visible;
+    animation: fadeIn;
+    animation-duration: 0.3s;
+}
+.addgrade-dialog .ope_dialog{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px #aaa;
+    margin-left: 30em;
+
+}
+.addgrade-dialog.open .ope_dialog{
+    animation: zoomIn;
+    animation-duration: 0.5s;
+}
+.addgrade-dialog.open .dialog-header
+{
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 1rem 20px;
+    color: #666;
+}
+
+.addgrade-dialog.open .dialog-footer{
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#addgrade_save-btn
+{
+    margin-left: 1.5em;
+    margin-right: 4.5em;
+}
+    
+/*选课界面样式*/
+.select_course_grade_dialog{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    background-color: rgb(255, 255, 255);
+    visibility: hidden;
+}
+
+.select_course_grade_dialog.open{
+    visibility: visible;
+}
+
+.select_course_grade_dialog .dialog{
+    
+    min-height: 30em;
+    min-width: 60em;
+}
+
+.choose_thiscourse
+{
+    text-align: right;
+}
+.choose_thiscourse .btn{
+    margin-left: 2px;
+    padding: 5px 12px;
+}
+.choose_thiscourse .btn:disabled{
+    background-color: grey
+}
+
+.select_dialog_head{
+    padding-top: 20px;
+    padding-left: 15em;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.select_course_grade_dialog.open .paper-terms{
+    margin-left: 3em;
+}
+.select_course_grade_dialog.open #choose_course-table{
+    margin-left: 6.5em;
+    margin-top: 1em;
+}
+.select_course_grade_dialog.open .dialog-footer{
+    position: absolute;
+    left: 66em;
+    bottom: 10em;
+}

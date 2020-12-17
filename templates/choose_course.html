@@ -1,0 +1,33 @@
+{% extends "student_base.html" %} {% block styles %}
+<link href="/choose_course.css" rel="stylesheet" />
+{% endblock %} 
+{% block page_content %}
+<div class="paper">
+    <div class="select_course_grade_dialog">
+        <form class="dialog">
+            <div class = "select_dialog_head">选课界面</div>
+            <div class ="paper-terms">
+                <input type="hidden" name = "student_name" id = "choose_course_studentname" height="16px" value="{{user}}">
+                <lable>选课学期：</lable>
+                <input type="text" name = "term" id = "choose_course_term" height="16px" value="2020-2021">
+                <input type="button" value="查询课程" id = "change_choose_termbtn" class = "btn">
+            </div>
+            <div class="paper-body">
+                <table id="choose_course-table" class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-stu_name">课程</th>
+                            <th class="col-stu_no">课程号</th>
+                            <th class="col-place">上课地点</th>
+                            <th class="col-time">上课时间</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/choose_course.js"></script>
+{% endblock %}

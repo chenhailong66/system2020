@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "teacher_base.html" %}
 
 <!--  -->
 {% block styles %}
@@ -9,8 +9,11 @@
 {% block page_content %}
 <div class="paper">
     <div class="paper-head">
-        <div id="new-btn" class="btn">新建学生记录</div>
+        <span id="new-btn" class="btn">新建学生记录</span>
+        <div class="logout"></div>
     </div>
+
+    <!--添加表格属性名-->
     <div class="paper-body">
         <table id="student-table" class="table">
             <thead>
@@ -26,6 +29,8 @@
             <tbody></tbody>
         </table>
     </div>
+
+    <!--新填一个学生信息，执行其他操作通过javascript-->
     <div class="student-editor dialog-background">
         <form class="dialog">
             <div class="dialog-head"></div>
@@ -55,6 +60,8 @@
             </div>
         </form>
     </div>
+
+    <!--确定是否删除界面-->
     <div class="comfirmation-dialog dialog-background">
         <form class="dialog">
             <div class="dialog-head"></div>
